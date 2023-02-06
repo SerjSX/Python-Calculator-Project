@@ -1,5 +1,7 @@
 # Calculator
 
+<img src="https://i.ibb.co/k0gBXcz/Untitled.png">
+
 **Tier:** 1-Beginner
 
 Calculators are not only one of the most useful tools available, but they are
