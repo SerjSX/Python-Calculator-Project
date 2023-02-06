@@ -289,34 +289,46 @@ def operation(operation_chosen):
             elif operation_chosen == "equal" and equal_launched == 0:
                 saved_number.append((str(equal), "="))
 
-            if operation_chosen == "equal":
-                if len(str(equal)) < 9:
-                    print(equal)
-                    # Split the result. We have to identify if it's a float or not, and my way
-                    # to do that is to first split the result. Then if the result of [1] 
-                    # is 0 then it can be an integer safely, so we can safely display it as an 
-                    # integer. Or else, display it as a float normally.
-                    split = str(equal).split(".")
-                    #print(split)
 
-                    if split[1] == '0':
+            if operation_chosen == "equal":
+                #print(equal)
+                # Split the result. We have to identify if it's a float or not, and my way
+                # to do that is to first split the result. Then if the result of [1] 
+                # is 0 then it can be an integer safely, so we can safely display it as an 
+                # integer. Or else, display it as a float normally.
+                split = str(equal).split(".")
+                #print(split)
+
+                # If the splitted [1], which is the decimal place after the ., is 0, then there is
+                # no decimal and we can safely use it as an integer and not a float.
+                if split[1] == '0':
+                    # Condition as long as it's under 9/8, it can display the results. Or else show
+                    # an error.
+                    if len(str(split[0])) < 9:
                         user_label.configure(text=str(int(equal)))
                     else:
-                        user_label.configure(text=str(equal))
+                        messagebox.showerror("ERR", "Result exceeds limit 8.")
                 else:
-                    messagebox.showerror("ERR", "Result exceeds limit 8.")
+                    if len(str(equal)) < 9:
+                        user_label.configure(text=str(equal))
+                    else:
+                        messagebox.showerror("ERR", "Result exceeds limit 8.")
             else:
-                if len(str(sum)) < 9:
-                    print(sum)
-                    split = str(sum).split(".")
-                    #print(split)
+                #print(sum)
+                split = str(sum).split(".")
+                #print(split)
 
-                    if split[1] == '0':
+                if split[1] == '0':
+                    if len(str(split[0])) < 9:
                         user_label.configure(text=str(int(sum)))
                     else:
-                        user_label.configure(text=str(sum))
+                        messagebox.showerror("ERR", "Result exceeds limit 8.")
                 else:
-                    messagebox.showerror("ERR", "Result exceeds limit 8.")
+                    if len(str(sum)) < 9:
+                        user_label.configure(text=str(sum))
+                    else:
+                        messagebox.showerror("ERR", "Result exceeds limit 8.")
+
 
     
     #print("Inserted numbers: ", inserted_numbers)
