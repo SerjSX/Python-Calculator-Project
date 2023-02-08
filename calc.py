@@ -15,6 +15,34 @@ saved_number = []
 equal_launched = 0
 equal = None
 
+# Used to calculate numbers/operations that you didn't calculate with the equal button.
+def to_consider(to_consider_sign, to_consider_amount, loop_number):
+    # According to the operation in to_consider_amount, do the operation
+    # by adding/subtracting/multiplying/dividing on the current number in the loop
+                        
+    if to_consider_sign == "-":
+        sum = to_consider_amount - loop_number
+        return sum
+    elif to_consider_sign == "x":
+        sum = to_consider_amount * loop_number   
+        return sum                     
+    elif to_consider_sign == "/":
+        try:
+            sum = to_consider_amount / loop_number 
+            # If it throws the ZeroDivisionError, then the user tried to divide by 0. Show an
+            # error messaebox and restart.
+            return sum
+        except ZeroDivisionError:
+            messagebox.showerror("Error", "You cannot divide by 0.")
+                                
+            # Clear the inserted numbers AND the last saved number, with changing the label to 0
+            inserted_numbers.clear()
+            saved_number.clear()
+            user_label.configure(text="0")
+            return 0.0
+    elif to_consider_sign == "+":
+        sum = to_consider_amount + loop_number
+        return sum
 
 # The main function where the operations are done in
 def operation(operation_chosen):
@@ -139,8 +167,6 @@ def operation(operation_chosen):
 
                 # If the operation is add, and the i[1] is +
                 if operation_chosen == "add" and i[1] == "+":
-                    #print("\nAdd")
-                    
                     # And if there isn't a to_consider amount, simply add the last sum with the current
                     # number from the loop
                     if to_consider_amount == None:
@@ -148,18 +174,11 @@ def operation(operation_chosen):
 
                     # If there is a to_consider amount, operate on it first
                     else:
-                        #print("To consider amount: ", to_consider_amount[0])
-                        #print("To do operation: ", to_consider_amount[1])
                         # According to the operation in to_consider_amount[1], do the operation
-                        # by adding/subtracting/multiplying/dividing on the current number in the loop
-                        if to_consider_amount[1] == "-":
-                            sum = to_consider_amount[0] - float(i[0])
-                        elif to_consider_amount[1] == "x":
-                            sum = to_consider_amount[0] * float(i[0])                        
-                        elif to_consider_amount[1] == "/":
-                            sum = to_consider_amount[0] / float(i[0])  
-                        elif to_consider_amount[1] == "+":
-                            sum = to_consider_amount[0] + float(i[0])  
+                        # by adding/subtracting/multiplying/dividing on the current number in the loop 
+                        # by using the to_consider function
+
+                        sum = to_consider(to_consider_amount[1], to_consider_amount[0], float(i[0]))
 
                     # Restart equal_launched to 0 so you would be able to click Enter again.
                     equal_launched = 0
@@ -182,22 +201,15 @@ def operation(operation_chosen):
                         # If it isn't None, then normally subtract the sum asigned on line 170
                         # with the one from the loop which is what the user wanted to subtract it with.
                         else:
-                            #print("Normal")
                             sum = float(sum) - float(i[0])
-                            #print(sum)
                     
                     # The below is the same as the addition.
                     else:
-                        #print("To consider amount: ", to_consider_amount[0])
-                        #print("To do operation: ", to_consider_amount[1])
-                        if to_consider_amount[1] == "-":
-                            sum = to_consider_amount[0] - float(i[0])
-                        elif to_consider_amount[1] == "x":
-                            sum = to_consider_amount[0] * float(i[0])                        
-                        elif to_consider_amount[1] == "/":
-                            sum = to_consider_amount[0] / float(i[0])  
-                        elif to_consider_amount[1] == "+":
-                            sum = to_consider_amount[0] + float(i[0]) 
+                        # According to the operation in to_consider_amount[1], do the operation
+                        # by adding/subtracting/multiplying/dividing on the current number in the loop 
+                        # by using the to_consider function
+
+                        sum = to_consider(to_consider_amount[1], to_consider_amount[0], float(i[0]))
 
                     equal_launched = 0
 
@@ -214,16 +226,11 @@ def operation(operation_chosen):
                             sum = float(sum) * float(i[0])
                             #print(sum)
                     else:
-                        #print("To consider amount: ", to_consider_amount[0])
-                        #print("To do operation: ", to_consider_amount[1])
-                        if to_consider_amount[1] == "-":
-                            sum = to_consider_amount[0] - float(i[0])
-                        elif to_consider_amount[1] == "x":
-                            sum = to_consider_amount[0] * float(i[0])                        
-                        elif to_consider_amount[1] == "/":
-                            sum = to_consider_amount[0] / float(i[0])  
-                        elif to_consider_amount[1] == "+":
-                            sum = to_consider_amount[0] + float(i[0]) 
+                        # According to the operation in to_consider_amount[1], do the operation
+                        # by adding/subtracting/multiplying/dividing on the current number in the loop 
+                        # by using the to_consider function
+
+                        sum = to_consider(to_consider_amount[1], to_consider_amount[0], float(i[0]))
 
                     equal_launched = 0
 
@@ -240,16 +247,11 @@ def operation(operation_chosen):
                             sum = float(sum) / float(i[0])
                             #print(sum)
                     else:
-                        #print("To consider amount: ", to_consider_amount[0])
-                        #print("To do operation: ", to_consider_amount[1])
-                        if to_consider_amount[1] == "-":
-                            sum = to_consider_amount[0] - float(i[0])
-                        elif to_consider_amount[1] == "x":
-                            sum = to_consider_amount[0] * float(i[0])                        
-                        elif to_consider_amount[1] == "/":
-                            sum = to_consider_amount[0] / float(i[0])  
-                        elif to_consider_amount[1] == "+":
-                            sum = to_consider_amount[0] + float(i[0]) 
+                        # According to the operation in to_consider_amount[1], do the operation
+                        # by adding/subtracting/multiplying/dividing on the current number in the loop 
+                        # by using the to_consider function
+
+                        sum = to_consider(to_consider_amount[1], to_consider_amount[0], float(i[0]))
 
                     equal_launched = 0
 
@@ -262,7 +264,19 @@ def operation(operation_chosen):
                         elif to_consider_amount[1] == "x":
                             equal = to_consider_amount[0] * float(i[0])                        
                         elif to_consider_amount[1] == "/":
-                            equal = to_consider_amount[0] / float(i[0])  
+                            try:
+                                equal = to_consider_amount[0] / float(i[0]) 
+                            # If it throws the ZeroDivisionError, then the user tried to divide by 0. Show an
+                            # error messaebox and restart.
+                            except ZeroDivisionError:
+                                messagebox.showerror("Error", "You cannot divide by 0.")
+                                
+                                # Clear the inserted numbers AND the last saved number, with changing the label to 0
+                                inserted_numbers.clear()
+                                saved_number.clear()
+                                user_label.configure(text="0")
+
+                                return 
                         elif to_consider_amount[1] == "+":
                             equal = to_consider_amount[0] + float(i[0])  
 
